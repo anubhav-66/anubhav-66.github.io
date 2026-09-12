@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anubhav Bhattacharjee — Software Engineer</title>
+<meta name="description" content="Anubhav Bhattacharjee — Software engineer working on search, backend systems, and applied ML.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0e1013;
+    --bg-panel: #15181d;
+    --line: #262b32;
+    --ink: #eae7de;
+    --ink-dim: #838a94;
+    --signal: #e8a33d;
+    --signal-dim: #6b5530;
+    --max: 640px;
+    --wide: 900px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--ink); }
+
+  .mono{
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  ::selection{ background: var(--signal-dim); color: var(--ink); }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+  }
+
+  /* ---------- layout shell ---------- */
+
+  .shell{
+    display: grid;
+    grid-template-columns: 64px 1fr;
+  }
+
+  @media (max-width: 800px){
+    .shell{ grid-template-columns: 1fr; }
+  }
+
+  .rail{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    border-right: 1px solid var(--line);
+  }
+
+  @media (max-width: 800px){
+    .rail{ display: none; }
+  }
+
+  .rail a{
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--line);
+    text-decoration: none;
+    position: relative;
+    transition: background 0.2s ease;
+  }
+
+  .rail a.active, .rail a:hover{
+    background: var(--signal);
+  }
+
+  .rail a .rail-label{
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--ink-dim);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .rail a:hover .rail-label{ opacity: 1; }
+
+  main{ min-width: 0; }
+
+  section{
+    padding: 96px 32px;
+    max-width: var(--wide);
+    margin: 0 auto;
+    border-bottom: 1px solid var(--line);
+  }
+
+  section:last-of-type{ border-bottom: none; }
+
+  @media (max-width: 640px){
+    section{ padding: 64px 24px; }
+  }
+
+  .prose{ max-width: var(--max); }
+
+  h2{
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-dim);
+    margin: 0 0 40px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.01em;
+  }
+
+  h2 span{ color: var(--signal); margin-right: 10px; }
+
+  /* ---------- hero ---------- */
+
+  .hero{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .hero-inner{
+    max-width: var(--wide);
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .waveform{
+    width: 100%;
+    max-width: 480px;
+    height: 64px;
+    margin-bottom: 28px;
+    display: block;
+  }
+
+  .waveform path{
+    fill: none;
+    stroke: var(--signal);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    animation: draw 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards 0.2s;
+  }
+
+  @keyframes draw{
+    to{ stroke-dashoffset: 0; }
+  }
+
+  .hero h1{
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 600;
+    line-height: 1.05;
+    margin: 0 0 18px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero .role{
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--signal);
+    font-size: 15px;
+    margin: 0 0 28px;
+  }
+
+  .hero p.lede{
+    max-width: 540px;
+    color: var(--ink-dim);
+    font-size: 18px;
+    margin: 0 0 36px;
+  }
+
+  .hero-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+  }
+
+  .hero-links a{
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 3px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .hero-links a:hover{
+    border-color: var(--signal);
+    color: var(--signal);
+  }
+
+  .scroll-cue{
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  @media (max-width: 640px){
+    .scroll-cue{ display: none; }
+  }
+
+  .scroll-cue .bar{
+    width: 1px;
+    height: 24px;
+    background: linear-gradient(var(--signal), transparent);
+  }
+
+  /* ---------- about ---------- */
+
+  .about p{ color: var(--ink-dim); margin: 0 0 18px; }
+  .about p:last-child{ margin-bottom: 0; }
+  .about strong{ color: var(--ink); font-weight: 500; }
+
+  /* ---------- experience ---------- */
+
+  .job{
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .job:first-of-type{ border-top: none; padding-top: 0; }
+
+  @media (max-width: 640px){
+    .job{ grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  .job time{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-dim);
+    padding-top: 3px;
+  }
+
+  .job h3{
+    margin: 0 0 2px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .job .org{
+    color: var(--signal);
+    font-size: 14px;
+    margin: 0 0 12px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .job ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--ink-dim);
+    max-width: var(--max);
+  }
+
+  .job li{
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 8px;
+  }
+
+  .job li::before{
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--signal);
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  /* ---------- projects ---------- */
+
+  .project{
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .project:first-of-type{ border-top: none; padding-top: 0; }
+
+  .project-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-bottom: 10px;
+  }
+
+  .project h3{
+    margin: 0;
+    font-size: 19px;
+    font-weight: 600;
+  }
+
+  .project a.repo{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-dim);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  .project a.repo:hover{ color: var(--signal); border-color: var(--signal); }
+
+  .project p{
+    color: var(--ink-dim);
+    max-width: var(--max);
+    margin: 0 0 14px;
+  }
+
+  .tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-dim);
+    border: 1px solid var(--line);
+    padding: 4px 9px;
+    white-space: nowrap;
+  }
+
+  /* ---------- skills ---------- */
+
+  .skill-row{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 16px 24px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .skill-row:first-of-type{ border-top: none; padding-top: 0; }
+
+  @media (max-width: 640px){
+    .skill-row{ grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  .skill-row .label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--signal);
+    padding-top: 5px;
+  }
+
+  .skill-row .items{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ---------- education / certs ---------- */
+
+  .edu h3{ margin: 0 0 4px; font-size: 19px; font-weight: 600; }
+  .edu .org{ color: var(--signal); font-family: 'IBM Plex Mono', monospace; font-size: 14px; margin: 0 0 4px; }
+  .edu .meta{ color: var(--ink-dim); font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; margin: 0 0 32px; }
+
+  .cert-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cert-list li{
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    color: var(--ink-dim);
+    font-size: 15px;
+  }
+
+  .cert-list li:first-child{ border-top: none; }
+
+  /* ---------- footer ---------- */
+
+  footer{
+    padding: 64px 32px 48px;
+    max-width: var(--wide);
+    margin: 0 auto;
+  }
+
+  footer h2{ color: var(--ink); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 600; font-family: 'Space Grotesk'; margin: 0 0 24px; letter-spacing: -0.01em; }
+
+  footer .contact-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    margin-bottom: 48px;
+  }
+
+  footer .contact-links a{
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 3px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  footer .contact-links a:hover{ color: var(--signal); border-color: var(--signal); }
+
+  footer .fine{
+    color: var(--ink-dim);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <nav class="rail" aria-label="Section navigation">
+    <a href="#about" data-label="about"><span class="rail-label">about</span></a>
+    <a href="#experience" data-label="experience"><span class="rail-label">experience</span></a>
+    <a href="#projects" data-label="projects"><span class="rail-label">projects</span></a>
+    <a href="#skills" data-label="skills"><span class="rail-label">skills</span></a>
+    <a href="#education" data-label="education"><span class="rail-label">education</span></a>
+    <a href="#contact" data-label="contact"><span class="rail-label">contact</span></a>
+  </nav>
+
+  <main>
+
+    <header class="hero" id="top">
+      <div class="hero-inner">
+        <svg class="waveform" viewBox="0 0 480 64" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,32 L20,32 L32,10 L44,54 L56,18 L68,46 L80,32 L100,32 L112,6 L124,58 L136,24 L148,40 L160,32 L180,32 L196,14 L212,50 L228,32 L260,32 L276,20 L292,44 L308,32 L340,32 L356,8 L372,56 L388,28 L404,38 L420,32 L480,32"/>
+        </svg>
+        <h1>Anubhav Bhattacharjee</h1>
+        <p class="role">software engineer — search &amp; backend systems</p>
+        <p class="lede">CS undergrad building efficient backends, RESTful APIs, and production-oriented ML systems. Currently researching EEG-to-text decoding at Gauhati University.</p>
+        <div class="hero-links">
+          <a href="https://github.com/anubhav-66" target="_blank" rel="noopener">github.com/anubhav-66</a>
+          <a href="https://www.linkedin.com/in/anubhav-bhattacharjee-a32916388/" target="_blank" rel="noopener">linkedin</a>
+          <a href="mailto:anubhavbhattacharjee13@gmail.com">anubhavbhattacharjee13@gmail.com</a>
+          <a href="tel:+918134999160">+91 81349 99160</a>
+        </div>
+      </div>
+      <div class="scroll-cue"><span class="bar"></span>scroll</div>
+    </header>
+
+    <section id="about" class="about">
+      <h2><span>·</span>about</h2>
+      <div class="prose">
+        <p>I'm a final-year Computer Science student (B.Tech, CGPA 8.3) at Sikkim Manipal Institute of Technology, with a focus on <strong>data structures, algorithms, and software design</strong> — and hands-on experience shipping systems in C++, Java, and Python.</p>
+        <p>My work spans <strong>backend engineering</strong> (REST APIs, Spring Boot, Django) and <strong>applied machine learning</strong> (PyTorch, TensorFlow, computer vision). I've published research on EEG-to-text decoding and built full-stack platforms end to end — frontend, backend, and cloud deployment.</p>
+        <p>I care about designing efficient pipelines and systems that hold up outside a notebook.</p>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2><span>·</span>experience</h2>
+
+      <div class="job">
+        <time>Aug 2025 – May 2026</time>
+        <div>
+          <h3>Research Intern (Hybrid)</h3>
+          <p class="org">Gauhati University — Dept. of Information Technology</p>
+          <ul>
+            <li>Built a Transformer-based EEG-to-text decoding model in PyTorch, reaching 72.25% accuracy on noisy multi-channel signal data — outperforming an LSTM baseline by ~12%.</li>
+            <li>Designed a signal preprocessing and feature-extraction pipeline, with efficient batch handling for large time-series datasets.</li>
+            <li>Packaged the model for real-time cloud inference on an AWS-compatible pipeline; research accepted and presented at AMRIT'25 International Conference.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <time>Sept 2026</time>
+        <div>
+          <h3>Technology Consulting Job Simulation</h3>
+          <p class="org">PwC (via Forage)</p>
+          <ul>
+            <li>Completed a self-paced simulation covering client discovery, requirements gathering, and solution design for enterprise technology engagements.</li>
+            <li>Built a client discovery interview guide and translated business requirements into user stories for a phased MVP roadmap.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <time>June 2025</time>
+        <div>
+          <h3>Software Engineering Virtual Intern</h3>
+          <p class="org">Accenture (via Forage)</p>
+          <ul>
+            <li>Completed an industry-grade simulation spanning architecture design, agile sprints, debugging, and code review.</li>
+            <li>Practiced translating functional requirements into technical designs, iterating through structured testing.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <time>Oct 2024 – Dec 2024</time>
+        <div>
+          <h3>Software Developer Intern (Remote)</h3>
+          <p class="org">Infosys Springboard Program</p>
+          <ul>
+            <li>Built an AI-assisted insurance management system in Java (JSP, Servlets) with MySQL, with rule-based plan recommendation logic across agile sprints.</li>
+            <li>Delivered end-to-end backend modules independently; awarded the Infosys Java Foundational Certification.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2><span>·</span>projects</h2>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>EEG Brain Signal-to-Text Decoder</h3>
+          <a class="repo" href="https://github.com/anubhav-66" target="_blank" rel="noopener">view on github ↗</a>
+        </div>
+        <p>A Transformer + CTC decoding architecture for EEG-to-text, reaching 72.25% accuracy on noisy multi-channel signals — a ~12% improvement over an LSTM baseline. Includes a robust preprocessing pipeline and AWS-compatible cloud inference deployment.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">Transformers</span><span class="tag">CTC</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Motion-Blurred Image Deblurring using GANs</h3>
+          <a class="repo" href="https://github.com/anubhav-66" target="_blank" rel="noopener">view on github ↗</a>
+        </div>
+        <p>A ResNet generator with a PatchGAN discriminator, combining adversarial, L1, and VGG perceptual loss. Reached ~28dB PSNR and 0.88 SSIM, cutting MSE by over 90% versus a Wiener baseline — outperforming classical methods like Richardson-Lucy and Van Cittert.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">ResNet</span><span class="tag">PatchGAN</span><span class="tag">VGG</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>My Policy Hub</h3>
+          <a class="repo" href="https://github.com/anubhav-66" target="_blank" rel="noopener">view on github ↗</a>
+        </div>
+        <p>A secure, role-based insurance platform with JWT authentication, appointment booking, agent assignment, and plan management. Built the full React frontend and designed/consumed RESTful APIs on Java and Spring Boot.</p>
+        <div class="tags">
+          <span class="tag">React</span><span class="tag">Spring Boot</span><span class="tag">MySQL</span><span class="tag">AWS EC2</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2><span>·</span>skills</h2>
+
+      <div class="skill-row">
+        <div class="label">languages</div>
+        <div class="items">
+          <span class="tag">C++</span><span class="tag">Java</span><span class="tag">Python</span><span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="label">backend</div>
+        <div class="items">
+          <span class="tag">REST APIs</span><span class="tag">Spring Boot</span><span class="tag">Django</span><span class="tag">Flask</span><span class="tag">JWT Auth</span><span class="tag">MySQL</span><span class="tag">MongoDB</span><span class="tag">PostgreSQL</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="label">cloud &amp; tools</div>
+        <div class="items">
+          <span class="tag">AWS (EC2, S3, Lambda)</span><span class="tag">GCP (Vertex AI, Cloud Run)</span><span class="tag">Docker</span><span class="tag">Redis</span><span class="tag">Git</span><span class="tag">Linux</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="label">AI / ML</div>
+        <div class="items">
+          <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Scikit-learn</span><span class="tag">Transformers</span><span class="tag">GANs</span><span class="tag">Computer Vision</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="label">foundations</div>
+        <div class="items">
+          <span class="tag">Data Structures</span><span class="tag">Algorithms</span><span class="tag">Complexity Analysis</span><span class="tag">OOP Design</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2><span>·</span>education</h2>
+      <div class="edu">
+        <h3>B.Tech in Computer Science &amp; Engineering</h3>
+        <p class="org">Sikkim Manipal Institute of Technology, Majitar</p>
+        <p class="meta">2022 – 2026 · CGPA 8.3 / 10</p>
+      </div>
+
+      <h2 style="margin-top:8px;"><span>·</span>certifications &amp; achievements</h2>
+      <ul class="cert-list">
+        <li>Research paper accepted and presented at AMRIT'25 International Conference (EEG Brain-Computer Interface)</li>
+        <li>Infosys Java Foundational Certification</li>
+        <li>Accenture Software Engineering Job Simulation &amp; PwC Technology Consulting Job Simulation (Forage)</li>
+        <li>IBM Agile &amp; Scrum Certification</li>
+      </ul>
+    </section>
+
+    <footer id="contact">
+      <h2 style="font-family:'IBM Plex Mono'; text-transform:none;">let's talk</h2>
+      <p style="color:var(--ink-dim); max-width:var(--max); margin: -8px 0 32px;">Open to software engineering roles in backend and search systems. Reach out by email, or find me on GitHub and LinkedIn.</p>
+      <div class="contact-links">
+        <a href="mailto:anubhavbhattacharjee13@gmail.com">anubhavbhattacharjee13@gmail.com</a>
+        <a href="tel:+918134999160">+91 81349 99160</a>
+        <a href="https://github.com/anubhav-66" target="_blank" rel="noopener">github.com/anubhav-66</a>
+        <a href="https://www.linkedin.com/in/anubhav-bhattacharjee-a32916388/" target="_blank" rel="noopener">linkedin</a>
+      </div>
+      <p class="fine">© 2026 Anubhav Bhattacharjee. Built with plain HTML &amp; CSS.</p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // Highlight active rail dot based on scroll position
+  const sections = document.querySelectorAll('main section, main header');
+  const railLinks = document.querySelectorAll('.rail a');
+
+  if ('IntersectionObserver' in window && railLinks.length){
+    const map = {};
+    railLinks.forEach(l => { map[l.getAttribute('href').replace('#','')] = l; });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        const link = map[id];
+        if (!link) return;
+        if (entry.isIntersecting){
+          railLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    sections.forEach(s => { if (s.id) observer.observe(s); });
+  }
+</script>
+
+</body>
+</html>
